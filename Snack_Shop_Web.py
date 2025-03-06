@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import os
 import datetime
 from googleapiclient.discovery import build
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials  # Updated import
+import json
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -10,7 +11,7 @@ import io
 import base64
 
 app = Flask(__name__)
-app.secret_key = 'supersuperndhs-secret-key-ndhs'  # Replace with your own unique string
+app.secret_key = 'supersuperndhs-secret-key-ndhs'  # Consider moving to env var for security
 
 # Snack data with "Poptarts" renamed
 snacks = {
@@ -22,7 +23,6 @@ snacks = {
 SPREADSHEET_ID = '1rwTYlHWIzttck_WOZH2mSYhHWAe2cL8tuUPNP-3w4wM'  # Replace with your ID
 SHEET_NAME = 'SalesData'
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-CREDENTIALS_FILE = os.path.join(os.path.dirname(__file__), 'snackshopapp-65fc5bb44f8d.json')
 
 # User credentials with locations
 USERS = {
@@ -32,7 +32,15 @@ USERS = {
 }
 
 def get_sheets_service():
-    creds = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE, SCOPES)
+    # Load credentials from environment variable or fallback to file (for local testing)
+    creds_json = os.getenv("GOOGLE_CREDENTIALS")
+    if creds_json:
+        creds_dict = json.loads(creds_json)
+        creds = Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
+    else:
+        # Fallback for local dev if file exists (not included in repo)
+        CREDENTIALS_FILE = os.path.join(os.path.dirname(__file__), 'snackshopapp-65fc5bb44f8d.json')
+        creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=SCOPES)
     return build('sheets', 'v4', credentials=creds)
 
 def initialize_google_sheet():
