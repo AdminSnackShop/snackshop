@@ -1,0 +1,261 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  background-color: #f5f5f7;
+  margin: 0;
+  padding: 0;
+  color: #1d1d1f;
+}
+
+header {
+  background: linear-gradient(135deg, #ffffff, #f5f5f7);
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  color: #1d1d1f;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.left-pane, .right-pane, .analysis-pane {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.left-pane {
+  flex: 2;
+}
+
+.right-pane {
+  flex: 1;
+}
+
+.analysis-pane {
+  width: 100%;
+  max-width: 800px;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 15px 0 10px;
+}
+
+.snack-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.snack-btn {
+  background: linear-gradient(135deg, #34c759, #28a745);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;  /* Increased from 12px */
+  font-size: 16px;  /* Increased from 14px */
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease, transform 0.1s ease;
+  width: 100%;  /* Ensures uniform size */
+  box-sizing: border-box;  /* Includes padding in width */
+  text-align: center;
+  line-height: 1.2;  /* Consistent height */
+}
+
+.snack-btn:hover {
+  background: linear-gradient(135deg, #2eb648, #23963d);
+  transform: scale(1.02);
+}
+
+.order-summary, .payment {
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.remove-btn {
+  background: linear-gradient(135deg, #ff3b30, #d32f2f);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease;
+}
+
+.remove-btn:hover {
+  background: linear-gradient(135deg, #e53935, #c62828);
+}
+
+.cash-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.cash-btn {
+  background: linear-gradient(135deg, #007aff, #0062cc);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease;
+}
+
+.cash-btn:hover {
+  background: linear-gradient(135deg, #006de6, #0052b3);
+}
+
+.process-btn, .reset-btn, .analysis-btn, .back-btn, .login-btn {
+  background: linear-gradient(135deg, #34c759, #28a745);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;  /* Uniform size */
+  width: 100%;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: background 0.2s ease;
+}
+
+.process-btn:hover, .reset-btn:hover, .analysis-btn:hover, .back-btn:hover, .login-btn:hover {
+  background: linear-gradient(135deg, #2eb648, #23963d);
+}
+
+.error {
+  color: #ff3b30;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.success {
+  color: #34c759;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transactions, .change-list {
+  list-style-type: none;
+  padding: 0;
+  font-size: 14px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin: 0;
+}
+
+.transactions li, .change-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e5e5ea;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #6e6e73;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d2d2d7;
+  border-radius: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #007aff;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+}

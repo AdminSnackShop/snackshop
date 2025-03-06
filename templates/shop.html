@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shop - Corporate Snack Shop</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Corporate Snack Shop</h1>
+  </header>
+  <div class="container">
+    <div class="left-pane card">
+      {% if error %}<p class="error">{{ error }}</p>{% endif %}
+      {% if success %}<p class="success">{{ success }}</p>{% endif %}
+      
+      <div class="snack-buttons">
+        {% for snack, price in snacks.items() %}
+          <form method="POST" style="display: inline;">
+            <input type="hidden" name="action" value="add_snack">
+            <input type="hidden" name="snack" value="{{ snack }}">
+            <button type="submit" class="snack-btn">{{ snack }}<br>${{ price }}</button>
+          </form>
+        {% endfor %}
+      </div>
+
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <p><strong>Total:</strong> ${{ total }}</p>
+        <p><strong>Items:</strong> {{ items|join(', ') if items else 'None' }}</p>
+        <form method="POST">
+          <input type="hidden" name="action" value="remove_last">
+          <button type="submit" class="remove-btn">Remove Last Item</button>
+        </form>
+      </div>
+
+      <div class="payment">
+        <h3>Payment</h3>
+        <p><strong>Amount Given:</strong> ${{ payment }}</p>
+        <div class="cash-buttons">
+          {% for amount in [0.50, 1.00, 5.00, 10.00, 20.00] %}
+            <form method="POST" style="display: inline;">
+              <input type="hidden" name="action" value="add_cash">
+              <input type="hidden" name="amount" value="{{ amount }}">
+              <button type="submit" class="cash-btn">${{ amount }}</button>
+            </form>
+          {% endfor %}
+        </div>
+        <form method="POST">
+          <input type="hidden" name="action" value="process">
+          <button type="submit" class="process-btn">Process Transaction</button>
+        </form>
+        <p><strong>Change:</strong> ${{ change }}</p>
+        {% if change_breakdown %}
+          <h4>Change Breakdown</h4>
+          <ul class="change-list">
+            {% for denom, count in change_breakdown.items() %}
+              <li>{{ denom }}: {{ count }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <form method="POST">
+          <input type="hidden" name="action" value="reset">
+          <button type="submit" class="reset-btn">New Order</button>
+        </form>
+        <a href="{{ url_for('analysis') }}" class="analysis-btn">Analysis</a>
+      </div>
+    </div>
+
+    <div class="right-pane card">
+      <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="logo">
+      <h3>Transaction History</h3>
+      <ul class="transactions">
+        {% for trans in transactions %}
+          <li>{{ trans }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Analysis - Corporate Snack Shop</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Corporate Snack Shop</h1>
+  </header>
+  <div class="container">
+    <div class="analysis-pane card">
+      <h2>Analysis</h2>
+      <p><strong>Total Sales:</strong> ${{ total_sales }}</p>
+      <p><strong>Most Popular Item:</strong> {{ most_popular[0] }} ({{ most_popular[1] }} sold)</p>
+      <img src="data:image/png;base64,{{ overall_chart }}" alt="Overall Snacks Sold" class="chart">
+      <h3>Sales by Origin</h3>
+      {% for origin in origin_sales %}
+        <p>{{ origin }} - Total Sales: ${{ origin_sales[origin] }}, Most Popular: {{ origin_most_popular[origin][0] }} ({{ origin_most_popular[origin][1] }} sold)</p>
+      {% endfor %}
+      <img src="data:image/png;base64,{{ origin_chart }}" alt="Sales by Origin" class="chart">
+      <a href="{{ url_for('shop') }}" class="back-btn">Back to Shop</a>
+    </div>
+  </div>
+</body>
+</html>
