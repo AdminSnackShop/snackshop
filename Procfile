@@ -1,1 +1,1 @@
-web: gunicorn app:app
+web: gunicorn Snack_Shop_Web:app
